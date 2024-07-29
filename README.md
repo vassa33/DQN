@@ -17,7 +17,7 @@ The project involves creating a custom Gym environment to simulate a farming fie
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/DQN.git
+   git clone https://github.com/vassa33/DQN.git
    cd DQN
 2. Create and activate a virtual environment (optional but recommended):
     ```bash
