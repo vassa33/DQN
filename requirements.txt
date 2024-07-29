@@ -1,0 +1,6 @@
+numpy
+gym
+tensorflow
+keras-rl
+matplotlib
+ffmpeg-python
