@@ -1,7 +1,7 @@
 import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers.legacy import Adam
 from rl.agents.dqn import DQNAgent
 from rl.policy import EpsGreedyQPolicy
 from rl.memory import SequentialMemory
@@ -30,7 +30,7 @@ def main():
 
     model = build_model(states, actions)
     dqn = build_agent(model, actions)
-    dqn.compile(Adam(lr=1e-3), metrics=['mae'])
+    dqn.compile(Adam(learning_rate=1e-3), metrics=['mae'])
 
     # Train the agent
     dqn.fit(env, nb_steps=50000, visualize=False, verbose=1)
