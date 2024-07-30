@@ -1,9 +1,12 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Suppress TensorFlow logging
+
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation, writers
+from matplotlib.animation import FuncAnimation, writers, PillowWriter
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Flatten
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers.legacy import Adam
 from rl.agents.dqn import DQNAgent
 from rl.policy import EpsGreedyQPolicy
 from rl.memory import SequentialMemory
@@ -42,7 +45,7 @@ def main():
 
     model = build_model(states, actions)
     dqn = build_agent(model, actions)
-    dqn.compile(Adam(lr=1e-3), metrics=['mae'])
+    dqn.compile(Adam(learning_rate=1e-3), metrics=['mae'])
 
     # Load the trained weights
     dqn.load_weights('dqn_irrigation_weights.h5f')
@@ -54,12 +57,20 @@ def main():
     fig = plt.figure(figsize=(12, 5))
     ani = FuncAnimation(fig, lambda i: plt.imshow(frames[i]), frames=len(frames), interval=200)
 
-    # Save animation as mp4
-    Writer = writers['ffmpeg']
-    writer = Writer(fps=5, metadata=dict(artist='Me'), bitrate=1800)
-    ani.save('irrigation_simulation.mp4', writer=writer)
+    # Try to save as MP4 with FFmpeg, fall back to GIF if not available
+    try:
+        Writer = writers['ffmpeg']
+        writer = Writer(fps=5, metadata=dict(artist='Me'), bitrate=1800)
+        ani.save('irrigation_simulation.mp4', writer=writer)
+        print("Simulation video saved as 'irrigation_simulation.mp4'")
+    except RuntimeError:
+        print("FFmpeg not available. Saving as GIF instead.")
+        writer = PillowWriter(fps=5)
+        ani.save('irrigation_simulation.gif', writer=writer)
+        print("Simulation saved as 'irrigation_simulation.gif'")
 
-    print("Simulation video saved as 'irrigation_simulation.mp4'")
+    # Display the animation
+    plt.show()
 
 if __name__ == "__main__":
     main()
