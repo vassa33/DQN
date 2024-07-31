@@ -26,7 +26,7 @@ The project involves creating a custom Gym environment to simulate a farming fie
 3. Install the required packages:
     ```bash
     pip install -r requirements.txt
-Note: Requires Python =< 3.11
+Note: Requires Python =< 3.11 & ffmpeg local installation
 
 ## Custom Environment
 The custom environment (IrrigationEnv) is defined in *irrigation_env.py*. It simulates a farming field with different soil moisture levels and crops.The agent can take actions such as watering specific areas, applying fertilizers, and adjusting irrigation schedules.
