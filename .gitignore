@@ -1,3 +1,5 @@
 /venv
 /__pycache__
+checkpoint
+dqn_checkpoint*
 dqn_irrigation*
