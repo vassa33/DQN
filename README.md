@@ -44,7 +44,7 @@ The simulation script (play.py) uses the trained policy network to simulate the 
 To run the simulation, execute: ```python play.py```
 
 ## Video Demonstration
-A 5-minute video demonstration of the simulation can be found [here](https://github.com/vassa33/DQN/blob/a263d8d72b9f21a3d6f504a1bebf61d253360c3d/irrigation_simulation.gif).
+A 5-minute video demonstration of the simulation can be found [here](irrigation_simulation.gif).
 
 ## References
 - [Gym Environment Creation](https://www.gymlibrary.dev/content/environment_creation/)
